@@ -1,4 +1,4 @@
-import bip39 from 'bip39';
+import {mnemonicToSeed, validateMnemonic} from 'bip39';
 import ethJSWallet from 'ethereumjs-wallet';
 import hdkey from 'ethereumjs-wallet/hdkey';
 import ProviderEngine from 'web3-provider-engine';
@@ -28,12 +28,12 @@ class HDWalletProvider {
       num_addresses = 1,
       shareNonce = true,
       wallet_hdpath = "m/44'/60'/0'/0/",
-      http_headers
+      headers
     } = options;
 
     this.hdwallet;
     this.wallet_hdpath = wallet_hdpath;
-    this.http_headers = http_headers;
+    this.headers = headers;
     this.wallets = {};
     this.addresses = [];
     this.engine = new ProviderEngine();
@@ -48,9 +48,9 @@ class HDWalletProvider {
 
     // private helper to check if given mnemonic uses BIP39 passphrase protection
     const checkBIP39Mnemonic = mnemonic => {
-      this.hdwallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(mnemonic));
+      this.hdwallet = hdkey.fromMasterSeed(mnemonicToSeed(mnemonic));
 
-      if (!bip39.validateMnemonic(mnemonic)) {
+      if (!validateMnemonic(mnemonic)) {
         throw new Error("Mnemonic invalid or undefined");
       }
 
@@ -140,12 +140,11 @@ class HDWalletProvider {
     this.engine.addProvider(new FiltersSubprovider());
     if (typeof provider === "string") {
       // shim Web3 to give it expected sendAsync method. Needed if web3-engine-provider upgraded!
-      // Web3.providers.HttpProvider.prototype.sendAsync =
-      // Web3.providers.HttpProvider.prototype.send;
+      const httpProvider = new Web3.providers.HttpProvider(provider, {keepAlive: false, headers: this.headers});
+      httpProvider.sendAsync = httpProvider.send;
+  
       this.engine.addProvider(
-        new ProviderSubprovider(
-          new Web3.providers.HttpProvider(provider, { keepAlive: false, ...this.http_headers })
-        )
+        new ProviderSubprovider(httpProvider)
       );
     } else {
       this.engine.addProvider(new ProviderSubprovider(provider));
