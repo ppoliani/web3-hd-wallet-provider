@@ -20,7 +20,7 @@ module.exports = {
 
   externals: ['websocket'],
   resolve: {
-    extensions: ['.node', 'json', '.loader.js', '.js', '.jsx'],
+    extensions: ['.node', 'json', '.loader.js', '.js', '.jsx', '.json'],
   },
   module: {
     rules: [
