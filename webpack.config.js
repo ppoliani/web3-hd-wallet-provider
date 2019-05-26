@@ -1,7 +1,7 @@
 const { resolve, join } = require('path');
 const { IgnorePlugin } = require('webpack');
 
-const moduleRoot = resolve(__dirname, '..');
+const moduleRoot = resolve(__dirname, '.');
 const outputPath = join(moduleRoot, 'dist');
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
   output: {
     path: outputPath,
     filename: 'index.js',
-    library: 'truffle-hdwallet-provider',
+    library: 'web3-hd-wallet-provider',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
@@ -28,6 +28,11 @@ module.exports = {
       // replace native `secp256k1` with pure js `elliptic.js`
       'secp256k1': 'secp256k1/elliptic.js',
     }
+  },
+  module: {
+    rules: [
+      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
+    ]
   },
   plugins: [
     // ignore these plugins completely
