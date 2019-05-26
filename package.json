@@ -1,0 +1,9 @@
+{
+  "name": "hd-wallet-provider",
+  "version": "1.0.0",
+  "description": "An hd web3js provider ",
+  "main": "dist/index.js",
+  "author": "ppoliani <ppoliani@gmail.com>",
+  "license": "MIT",
+  "private": false
+}

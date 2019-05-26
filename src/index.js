@@ -1,7 +1,6 @@
 const bip39 = require("bip39");
 const ethJSWallet = require("ethereumjs-wallet");
 const hdkey = require("ethereumjs-wallet/hdkey");
-const debug = require("debug")("truffle-hdwallet-provider");
 const ProviderEngine = require("web3-provider-engine");
 const FiltersSubprovider = require("web3-provider-engine/subproviders/filters.js");
 const NonceSubProvider = require("web3-provider-engine/subproviders/nonce-tracker.js");
