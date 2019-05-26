@@ -162,7 +162,6 @@ class HDWalletProvider {
 
   // returns the address of the given address_index, first checking the cache
   getAddress(idx) {
-    debug("getting addresses", this.addresses[0], idx);
     if (!idx) {
       return this.addresses[0];
     } else {
