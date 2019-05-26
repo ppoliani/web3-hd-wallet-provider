@@ -38,17 +38,5 @@ module.exports = {
   plugins: [
     // ignore these plugins completely
     new IgnorePlugin(/^(?:electron|ws)$/)
-  ],
-
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          chunks: 'all'
-        }
-      }
-    }
-  }
+  ]
 };
