@@ -18,7 +18,7 @@ module.exports = {
     umdNamedDefine: true
   },
 
-  externals: ['websocket'],
+  externals: ['fs', 'bindings', 'any-promise', 'websocket', 'swarm-js'],
   resolve: {
     extensions: ['.node', 'json', '.loader.js', '.js', '.jsx', '.json'],
   },
