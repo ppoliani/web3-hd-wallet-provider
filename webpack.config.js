@@ -6,10 +6,10 @@ const moduleRoot = resolve(__dirname, '.');
 const outputPath = join(moduleRoot, 'dist');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: join(moduleRoot, 'src', 'index.js'),
   target: 'node',
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   output: {
     path: outputPath,
     filename: 'index.js',
