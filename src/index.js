@@ -141,7 +141,16 @@ class HDWalletProvider {
     if (typeof provider === "string") {
       // shim Web3 to give it expected sendAsync method. Needed if web3-engine-provider upgraded!
       const httpProvider = new Web3.providers.HttpProvider(provider, 0, this.headers);
-      httpProvider.sendAsync = httpProvider.send;
+      
+      httpProvider.sendAsync = async (payload, cb) => {
+        try {
+          const response = await httpProvider.send(payload.method, payload.params);
+          cb(null, response);
+        }
+        catch(err) {
+          cb(err, null);
+        }
+      }
   
       this.engine.addProvider(
         new ProviderSubprovider(httpProvider)

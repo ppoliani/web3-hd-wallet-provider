@@ -8062,10 +8062,9 @@ web3-net@1.0.0-beta.51:
     web3-providers "1.0.0-beta.51"
     web3-utils "1.0.0-beta.51"
 
-web3-provider-engine@^15.0.0:
+"web3-provider-engine@https://github.com/generalpiston/web3-provider-engine.git#patch-1":
   version "15.0.0"
-  resolved "https://registry.yarnpkg.com/web3-provider-engine/-/web3-provider-engine-15.0.0.tgz#3331ab0b46af936e4071ea233ec33049936b4c4d"
-  integrity sha512-T39JS4Wgh2+J5W4KztmuHd7QdElhvfxTxLI1WUb3M0IIzqio2WR89AN8YLz40Ssv6T4mW1QuiFbopQJGeUrvJg==
+  resolved "https://github.com/generalpiston/web3-provider-engine.git#21b1849b5433c0df5371c13a33922c7e1ee83374"
   dependencies:
     async "^2.5.0"
     backoff "^2.5.0"
