@@ -144,8 +144,12 @@ class HDWalletProvider {
       
       httpProvider.sendAsync = async (payload, cb) => {
         try {
+          if(payload.method === 'eth_getBlockByNumber') {
+            payload.params[0] = 'latest';
+          }
+          
           const response = await httpProvider.send(payload.method, payload.params);
-          cb(null, response);
+          cb(null, {result: response});
         }
         catch(err) {
           cb(err, null);
